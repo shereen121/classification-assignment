@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌱 Bean Classifier Pro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <h1>🌱 Bean Classifier Pro</h1>
+                <p>Advanced AI-powered dry bean classification using machine learning</p>
+                <div class="accuracy-badge">
+                    <span class="accuracy-score">92.68% Accuracy</span>
+                    <span class="accuracy-note">(Stacking Classifier)</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <div class="input-section">
+                <div class="card">
+                    <h2>🔍 Single Bean Analysis</h2>
+                    <p class="card-description">Enter the morphological features of a single bean for classification</p>
+                    
+                    <form id="prediction-form">
+                        <div class="feature-grid" id="feature-inputs">
+                            {% for feature in features %}
+                            <div class="feature-group">
+                                <label for="feature-{{ loop.index0 }}" class="feature-label">
+                                    {{ feature }}
+                                    <span class="tooltip">?</span>
+                                    <div class="tooltip-text">{{ feature_descriptions[feature] }}</div>
+                                </label>
+                                <input type="number" id="feature-{{ loop.index0 }}" 
+                                       step="any" placeholder="0.0" required
+                                       class="feature-input">
+                            </div>
+                            {% endfor %}
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="submit" class="btn-primary">
+                                <span class="btn-icon">🔍</span>
+                                Classify Bean
+                            </button>
+                            <button type="button" onclick="loadSampleData()" class="btn-secondary">
+                                <span class="btn-icon">📊</span>
+                                Load Sample Data
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="card">
+                    <h2>📊 Batch Bean Analysis</h2>
+                    <p class="card-description">Classify multiple beans at once using JSON format</p>
+                    
+                    <textarea id="batch-input" placeholder='Enter features in JSON format:
+[
+  [area, perimeter, major_axis, minor_axis, aspect_ratio, eccentricity, convex_area, equiv_diameter, extent, solidity, roundness, compactness, shape1, shape2, shape3, shape4],
+  ...
+]' rows="8"></textarea>
+                    
+                    <div class="form-actions">
+                        <button onclick="batchPredict()" class="btn-primary">
+                            <span class="btn-icon">📦</span>
+                            Batch Classify
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="results-section">
+                <div class="card">
+                    <h2>📈 Classification Results</h2>
+                    <div id="results-container">
+                        <div class="placeholder-result">
+                            <div class="bean-icon">🌱</div>
+                            <p>Enter bean features and click "Classify Bean" to see results</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>📚 Bean Types Database</h2>
+                    <div class="bean-types-grid">
+                        <div class="bean-type-card" style="border-left-color: #8B4513;">
+                            <h4>BARBUNYA</h4>
+                            <p>Turkish kidney bean</p>
+                            <small>Phaseolus vulgaris</small>
+                        </div>
+                        <div class="bean-type-card" style="border-left-color: #000000;">
+                            <h4>BOMBAY</h4>
+                            <p>Black-eyed pea</p>
+                            <small>Vigna unguiculata</small>
+                        </div>
+                        <div class="bean-type-card" style="border-left-color: #F5F5DC;">
+                            <h4>CALI</h4>
+                            <p>Lima bean</p>
+                            <small>Phaseolus lunatus</small>
+                        </div>
+                        <div class="bean-type-card" style="border-left-color: #FFFFFF;">
+                            <h4>DERMASON</h4>
+                            <p>White kidney bean</p>
+                            <small>Phaseolus vulgaris</small>
+                        </div>
+                        <div class="bean-type-card" style="border-left-color: #8B0000;">
+                            <h4>HOROZ</h4>
+                            <p>Runner bean</p>
+                            <small>Phaseolus coccineus</small>
+                        </div>
+                        <div class="bean-type-card" style="border-left-color: #FFD700;">
+                            <h4>SEKER</h4>
+                            <p>Sugar bean</p>
+                            <small>Phaseolus vulgaris</small>
+                        </div>
+                        <div class="bean-type-card" style="border-left-color: #90EE90;">
+                            <h4>SIRA</h4>
+                            <p>Mung bean</p>
+                            <small>Vigna radiata</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>Bean Classifier Pro | Powered by Machine Learning | Dry Bean Dataset</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
