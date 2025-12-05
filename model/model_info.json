@@ -1,0 +1,41 @@
+{
+  "model_type": "StackingClassifier",
+  "base_estimators": [
+    "LogisticRegression",
+    "SVC"
+  ],
+  "final_estimator": "LogisticRegression",
+  "accuracy": 92.68,
+  "features": [
+    "Area",
+    "Perimeter",
+    "MajorAxisLength",
+    "MinorAxisLength",
+    "AspectRation",
+    "Eccentricity",
+    "ConvexArea",
+    "EquivDiameter",
+    "Extent",
+    "Solidity",
+    "Roundness",
+    "Compactness",
+    "ShapeFactor1",
+    "ShapeFactor2",
+    "ShapeFactor3",
+    "ShapeFactor4"
+  ],
+  "preprocessing": {
+    "log_transformation": true,
+    "scaling": "StandardScaler",
+    "label_encoding": true
+  },
+  "bean_classes": {
+    "0": "BARBUNYA",
+    "1": "BOMBAY",
+    "2": "CALI",
+    "3": "DERMASON",
+    "4": "HOROZ",
+    "5": "SEKER",
+    "6": "SIRA"
+  }
+}
